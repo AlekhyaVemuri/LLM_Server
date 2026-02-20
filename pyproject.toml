@@ -9,9 +9,25 @@ dependencies = [
     "fastapi>=0.129.0",
     "jupyter>=1.1.1",
     "qwen-vl-utils>=0.0.14",
-    "torch>=2.10.0",
-    "torchaudio>=2.10.0",
-    "torchvision>=0.25.0",
+    "torch>=2.7.0",
+    "torchvision>=0.22.0",
+    "pytorch-triton-xpu>=3.3.0 ; sys_platform == 'win32' or sys_platform == 'linux'",
     "transformers>=4.48.0",
     "uvicorn>=0.40.0",
 ]
+
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-xpu", marker = "sys_platform == 'win32' or sys_platform == 'linux'" },
+]
+torchvision = [
+  { index = "pytorch-xpu", marker = "sys_platform == 'win32' or sys_platform == 'linux'" },
+]
+pytorch-triton-xpu = [
+  { index = "pytorch-xpu", marker = "sys_platform == 'win32' or sys_platform == 'linux'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-xpu"
+url = "https://download.pytorch.org/whl/xpu"
+explicit = true
